@@ -141,7 +141,8 @@ for extype in exam_type:
 
 #储存到文件
 header = ["考试年份","准考证号","学号","姓名","性别","总分","缺考","违纪","听力","阅读","写作","考试类型"]
-f = open("c.txt","w")
+result.insert(0,header)
+f = open("result.csv","w")
 wcsv = csv.writer(f)
 print("最后有效数据长度：",len(result))
 wcsv.writerows(result)

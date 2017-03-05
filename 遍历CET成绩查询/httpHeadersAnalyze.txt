@@ -1,6 +1,0 @@
-Google Chrome Ignotie
-
-func=login&Op=%B4%F3%D1%A7%D3%A2%D3%EF%B9%FA%BC%D2%C1%F9%BC%B6&hdName=&HdXm=%D5%C5%C1%FA&TheTime=20161217&imageField22.x=20&imageField22.y=4
-My Python Script
-
-TheTime=20161217&func=login&HdXm=%25D5%25C5%25C1%25FA&imageField22.y=13&Op=%25B4%25F3%25D1%25A7%25D3%25A2%25D3%25EF%25B9%25FA%25BC%25D2%25C1%25F9%25BC%25B6&imageField22.x=18&hdName=
