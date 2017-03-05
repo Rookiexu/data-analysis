@@ -20,7 +20,7 @@ for file in flist:
         del allreaderlist[0]
         del allreaderlist[0]
         for student in allreaderlist:
-            studentlist += student[2].replace(' ','') + ","
+            studentlist += student[2].replace(' ','') + ":" + file[:file.find('.')] + ","
 
 f = open("slist_csa.txt","w")
 f.write(studentlist)

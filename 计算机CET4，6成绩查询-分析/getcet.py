@@ -70,7 +70,7 @@ def isCS(sid3):
 
 
 #该函数用于匹配出一个学生的姓名，考号，学号，姓名，性别，总分，缺考，违纪，听力，阅读，写作，综合
-def match(html,year,extype):
+def match(html,year,extype,majorclass):
     #提取数据所在表格
     spos = html.find("<TBODY><TR VALIGN=top ALIGN=left><TD bordercolor=#000000 bordercolorlight=#000000 bordercolordark=#FFFFFF align=\"Center\" valign=bottom>")
     epos = html.find("</TBODY>",spos)
@@ -92,6 +92,7 @@ def match(html,year,extype):
                 #手动计算总分
                 subresult[5] = cacluateScore(subresult[8],subresult[9],subresult[10])
                 subresult[0] = year
+                subresult[7] = majorclass
                 subresult[11] = extype
                 result.append(subresult.copy())
             subresult.clear()
@@ -100,6 +101,7 @@ def match(html,year,extype):
     if len(subresult) > 0 and isCS(subresult[2]):
         subresult[5] = cacluateScore(subresult[8],subresult[9],subresult[10])
         subresult[0] = year
+        subresult[7] = majorclass
         subresult[11] = extype
         result.append(subresult.copy())
     return result
@@ -116,13 +118,16 @@ sstr = f.read()
 f.close()
 slist = sstr.split(",")
 ssum = len(slist)
-print(slist,"\n学生数量：",ssum)
+#print(slist,"\n学生数量：",ssum)
+print("学生数量：",ssum)
 #开始循环处理
 result = []  #储存结果
 #开始查询,我们要遍历查询是4级，6级，每一年（从开学到现在）所有数据
 #用第一列（序号）代表考试年份（见前面的数组），最后一列（综合）代表考试类型（4，6级别）
 
 #4级，6级
+processed = 0
+ssum *= len(exam_type) * len(exam_season) 
 for extype in exam_type:
     #考试时间
     for exsea in exam_season:
@@ -130,17 +135,20 @@ for extype in exam_type:
         sdata['Op'] = extype
         sdata['TheTime'] = exsea
         for student in slist:
-            print("正在查询",student,"在",exsea,"进行的" + extype.decode("GB2312") +"...",end='\t\t\t')
-            #请求数据
-            r = session.post("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp", data=genQuery(student),headers=headerget)
-            #print(r.status_code, r.reason)
-            #print(r.headers)
-            #重新编码，防止中文乱码
-            print("完成\n\t\t\t\t\t\t\t解析数据...",end='\t')
-            shtml = r.text.encode(r.encoding).decode('GB2312','ignore')
-            xsresult = match(shtml,exsea,extype.decode("GB2312"))
-            result.extend(xsresult)
-            print("完成")
+            if len(student) > 1:
+                stu = student.split(":")
+                print("正在查询",stu[0],"在",exsea,"进行的" + extype.decode("GB2312") +"...",end='\t\t\t')
+                #请求数据
+                r = session.post("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp", data=genQuery(stu[0]),headers=headerget)
+                #print(r.status_code, r.reason)
+                #print(r.headers)
+                #重新编码，防止中文乱码
+                print("完成\n\t\t\t\t\t\t\t解析数据...",end='\t')
+                shtml = r.text.encode(r.encoding).decode('GB2312','ignore')
+                xsresult = match(shtml,exsea,extype.decode("GB2312"),stu[1])
+                result.extend(xsresult)
+                processed+=1
+                print("完成\t",processed,"/",ssum)
 
 #储存到文件
 header = ["考试年份","准考证号","学号","姓名","性别","总分","缺考","违纪","听力","阅读","写作","考试类型"]
