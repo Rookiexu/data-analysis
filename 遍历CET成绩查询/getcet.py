@@ -53,7 +53,10 @@ headerget = {
 
 #该函数用于生成查询字符串
 def genQuery(name):
-    sdata['HdXm'] = name.encode('GB2312')
+    try:
+        sdata['HdXm'] = name.encode('GB2312')
+    except:
+        sdata['HdXm'] = name.encode('GB18030')
     return sdata
 
 def cacluateScore(a,b,c):
