@@ -26,3 +26,5 @@ f = open("slist_csa.txt","w")
 f.write(studentlist)
 f.close()
 
+print("\n----\n处理完毕，共",studentlist.count(','),"名学生。")
+

@@ -13,6 +13,8 @@
 
 `analyze.py`：用户分析四六级成绩的脚本文件
 
+`generateTable.py`：用于统一学生信息的脚本
+
 `getcet.py`：用于查询成绩的脚本
 
 `csCET46list.csv`：计算机学院学生四六级情况

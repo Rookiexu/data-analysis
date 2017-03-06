@@ -155,6 +155,6 @@ header = ["考试年份","准考证号","学号","姓名","性别","总分","缺
 result.insert(0,header)
 f = open("result.csv","w")
 wcsv = csv.writer(f)
-print("最后有效数据长度：",len(result))
+print("数据总量：",len(result),";原始数据长度:",ssum/len(exam_type)/len(exam_season) )
 wcsv.writerows(result)
 f.close()
