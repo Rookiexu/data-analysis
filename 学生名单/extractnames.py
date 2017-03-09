@@ -31,10 +31,10 @@ for file in flist:
         del allreaderlist[0]
         del allreaderlist[0]
         for student in allreaderlist:
-            studentlist += student[2].replace(' ','') + ":" + file[:file.find('.')] + ","
+            studentlist += student[2].replace(' ','') + ":" + file[:file.find('.')] + ":" + student[1] +","
 
 f = open("slist_csa.txt","wb")
-f.write(studentlist.encode('GB18030','ignore'))
+f.write(studentlist.encode('UTF-8','ignore'))
 f.close()
 
 print("\n----\n处理完毕，共",studentlist.count(','),"名学生。")

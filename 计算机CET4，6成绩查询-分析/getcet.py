@@ -62,15 +62,21 @@ def genQuery(name):
 def cacluateScore(a,b,c):
     return int(a) + int(b) + int(c)
 
-#学号，确保是计算机学院的
-def isCS(sid3):
-    if sid3.find("201505") < 0:
+#学号，确保是指定学院的，默认为计算机学院15级
+def isCS(sid3,schoolhead="201505"):
+    if sid3.find(schoolhead) < 0:
         return False
     return True
 
+#当存在重名的时候，我们通过这个限制条件确保查询的人的确是我们希望
+#查询的那个人，通过学号确保
+def isStudentWeWant(sidinfo,stuid):
+    if sidinfo[2] == stuid:
+        return True
+    return False
 
 #该函数用于匹配出一个学生的姓名，考号，学号，姓名，性别，总分，缺考，违纪，听力，阅读，写作，综合
-def match(html,year,extype,majorclass):
+def match(html,year,extype,majorclass,stuid):
     #提取数据所在表格
     spos = html.find("<TBODY><TR VALIGN=top ALIGN=left><TD bordercolor=#000000 bordercolorlight=#000000 bordercolordark=#FFFFFF align=\"Center\" valign=bottom>")
     epos = html.find("</TBODY>",spos)
@@ -87,7 +93,11 @@ def match(html,year,extype,majorclass):
             subresult.append(buf)
             xc+=1
         else:
-            if len(subresult) > 0 and isCS(subresult[2]):
+            #将查询到的记录添加到记录集中
+            #在这里我们需要判断查询到的用户是否和目标用户一样
+            #通过学号判断,由于每一次我们仅会查询一个，故找到目标用户后我们就应该
+            #跳出循环，返回结果
+            if len(subresult) > 0 and isStudentWeWant(subresult,stuid): #isCS(subresult[2]):
                 #print(subresult)
                 #手动计算总分
                 subresult[5] = cacluateScore(subresult[8],subresult[9],subresult[10])
@@ -95,10 +105,12 @@ def match(html,year,extype,majorclass):
                 subresult[7] = majorclass
                 subresult[11] = extype
                 result.append(subresult.copy())
+                subresult.clear()
+                break
             subresult.clear()
             subresult.append(buf)
             xc = 1
-    if len(subresult) > 0 and isCS(subresult[2]):
+    if len(subresult) > 0 and isStudentWeWant(subresult,stuid): #isCS(subresult[2]):
         subresult[5] = cacluateScore(subresult[8],subresult[9],subresult[10])
         subresult[0] = year
         subresult[7] = majorclass
@@ -113,8 +125,9 @@ session.get("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp?Op=%B4%F3%D1%A7%D3%A2
 print(session.cookies.get_dict())
 
 #加载学生列表
-f = open("slist_csa.txt","r")
+f = open("slist_csa.txt","rb")
 sstr = f.read()
+sstr = sstr.decode("UTF-8","ignore")
 f.close()
 slist = sstr.split(",")
 ssum = len(slist)
@@ -136,6 +149,7 @@ for extype in exam_type:
         sdata['TheTime'] = exsea
         for student in slist:
             if len(student) > 1:
+                # stu结构： [ 学生姓名,班级,学号 ] 
                 stu = student.split(":")
                 print("正在查询",stu[0],"在",exsea,"进行的" + extype.decode("GB2312") +"...",end='\t\t\t')
                 #请求数据
@@ -145,7 +159,7 @@ for extype in exam_type:
                 #重新编码，防止中文乱码
                 print("完成\n\t\t\t\t\t\t\t解析数据...",end='\t')
                 shtml = r.text.encode(r.encoding).decode('GB2312','ignore')
-                xsresult = match(shtml,exsea,extype.decode("GB2312"),stu[1])
+                xsresult = match(shtml,exsea,extype.decode("GB2312"),stu[1],stu[2])
                 result.extend(xsresult)
                 processed+=1
                 print("完成\t",processed,"/",ssum)
