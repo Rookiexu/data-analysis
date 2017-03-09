@@ -91,7 +91,7 @@ def match(html,year,extype,majorclass,stuid):
         try:
             buf = td.find('font').contents[0]
         except Exception as e:
-            buf = "ERROR" + str(e)
+            buf = "ERROR:" + str(e)
         buf = buf.replace('\r\n','').replace('\n','')
         if xc < 12:
             subresult.append(buf)
@@ -169,7 +169,12 @@ for extype in exam_type:
                     print("跳过\t",processed,"/",ssum)
                     continue 
                 #请求数据
-                r = session.post("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp", data=genQuery(stu[0]),headers=headerget)
+                r = None
+                try:
+                    r = session.post("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp", data=genQuery(stu[0]),headers=headerget)
+                except Exception as e:
+                    print(e)
+                    continue
                 #print(r.status_code, r.reason)
                 #print(r.headers)
                 #重新编码，防止中文乱码
