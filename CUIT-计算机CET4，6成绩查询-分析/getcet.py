@@ -87,7 +87,11 @@ def match(html,year,extype,majorclass,stuid):
     subresult = []
     xc = 0
     for td in tds:
-        buf = td.find('font').contents[0]
+        buf = ""
+        try:
+            buf = td.find('font').contents[0]
+        except Exception as e:
+            buf = "ERROR" + str(e)
         buf = buf.replace('\r\n','').replace('\n','')
         if xc < 12:
             subresult.append(buf)
@@ -141,6 +145,9 @@ result = []  #储存结果
 #4级，6级
 processed = 0
 ssum *= len(exam_type) * len(exam_season) 
+#下面为查询2016级学生的时候需要跳过的列表
+skip_year = [20160618,20151219]
+skip_exam = ['大学英语国家六级'.encode('GB2312')]
 for extype in exam_type:
     #考试时间
     for exsea in exam_season:
@@ -151,7 +158,16 @@ for extype in exam_type:
             if len(student) > 1:
                 # stu结构： [ 学生姓名,班级,学号 ] 
                 stu = student.split(":")
-                print("正在查询",stu[0],"在",exsea,"进行的" + extype.decode("GB2312") +"...",end='\t\t\t')
+                try:
+                    print("正在查询",stu[0],"在",exsea,"进行的" + extype.decode("GB2312") +"...",end='\t\t\t')
+                except Exception as e:
+                    print("输出出错\t\t\t字符无法输出" + extype.decode("GB2312") +"...",end='\t\t\t')
+                #如果学号前4位为2016，则只有四级成绩（2016年12月的），故需要跳过该类学生
+                #下面这个if用于手动跳过2016级学生的六级全部，四级除2016-12月份之外的查询
+                if stu[2][:4] == "2016" and (exsea in skip_year or extype in skip_exam):
+                    processed+=1
+                    print("跳过\t",processed,"/",ssum)
+                    continue 
                 #请求数据
                 r = session.post("http://jxgl.cuit.edu.cn/Jxgl/Djks/Default.asp", data=genQuery(stu[0]),headers=headerget)
                 #print(r.status_code, r.reason)
