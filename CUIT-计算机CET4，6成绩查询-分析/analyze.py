@@ -275,7 +275,7 @@ if True:
             plt.title(GRAPH_TITLE+"第一次四级最高分与最低分与平均分对比图 - by Kanch",fontproperties=font_set)
             plt.xlabel("年级",fontproperties=font_set)
             plt.ylabel("考试分数",fontproperties=font_set)
-            plt.legend(loc='upper right')
+            plt.legend(loc='middle right')
             plt.show()
 
         
