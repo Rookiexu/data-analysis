@@ -44,7 +44,9 @@ def filterStudent(student):
     #student 变量应该为一个list，其结构如下：
     # [学号,考号,姓名,班级,[[成绩1：考试时间,类型,缺考,总分,听力,阅读,写作],[成绩2：考试时间,类型,总分,听力,阅读,写作]]
     #通过学号筛选,学号例如 ： 2015 05 1152
-    if student[0][:6] == "201305":
+    #修改下面的if块来修改筛选条件
+    if student[0][4:6] == "05": #and student[0][0:4] != "2016": #筛选出计算机学院
+    #if student[0][:6] == "201305": 
         #这里筛选出计算机学院2013级学生
         return False
     return True
@@ -71,6 +73,7 @@ if todo("是否要计算每一名同学的CET4与CET6极差?"):
     dissmissed = 0
     counted = 0
     for stu in stulist:
+        print(stu)
         #分类成绩list
         #[成绩1：考试时间,类型,缺考,总分,听力,阅读,写作]
         #           0     1   2    3    4   5    6
@@ -97,7 +100,7 @@ if todo("是否要计算每一名同学的CET4与CET6极差?"):
     wantsave("result_extreme_deviation.csv",v426list)
 
 #求听力，阅读，写作对总分的贡献情况
-if todo("是否需要显示详细分析数据（带图表）？"):
+if True:
     #首先需要数据分类
     #[学号,考号,姓名,班级, [  [成绩1：考试时间,类型,缺考,总分,听力,阅读,写作],[成绩2：考试时间,类型,总分,听力,阅读,写作]  ] ]
     #本次分类后得到的数据为每一年四六级的数据数组
@@ -107,8 +110,8 @@ if todo("是否需要显示详细分析数据（带图表）？"):
     CET6SCORE = []
     #构造符合以上条件的结构体
     for season in exam_season:
-        CET4SCORE.append( [ season , [ y for x in stulist for y in x[4] if y[0] == season and y[1] == CET4 ].copy() ] )
-        CET6SCORE.append( [ season , [ y for x in stulist for y in x[4] if y[0] == season and y[1] == CET6 ].copy() ] )
+        CET4SCORE.append( [ season , [ y+[x[0]] for x in stulist for y in x[4] if y[0] == season and y[1] == CET4 ].copy() ] )
+        CET6SCORE.append( [ season , [ y+[x[0]] for x in stulist for y in x[4] if y[0] == season and y[1] == CET6 ].copy() ] )
     print("\n---\n进行分类后的数据长度,CET4：",sum([ len(x[1]) for x in CET4SCORE ]),",CET6：",sum([len(x[1]) for x in CET6SCORE]),"(大多数人考了不止一次)")
     print("其中，CET4成绩包含",[x[0] for x in CET4SCORE],"时间段的数据\nCET6包含",[x[0] for x in CET6SCORE],"时间段的数据\n---")
     #开始绘制图表
@@ -241,4 +244,38 @@ if todo("是否需要显示详细分析数据（带图表）？"):
     if True:
         #这里的代码专用于计算机学院，如果你要分析其它学院，请删掉这里的if块
         #绘制计算机学院2013级，2014级，2015级在同时间段内的过级情
+        everylevel = []  #[年级，过级率，最高分，最低分，平均分]
+        for cet4 in CET4SCORE:
+            #抽取出每一届的第一次四级情况
+            #[考试时间,类型,缺考,总分,听力,阅读,写作,学号]
+            if(len(cet4[1])) == 0 or cet4[0][4:6]!="12":
+                continue
+            passrate = str(round(len([x[3] for x in cet4[1] if int(x[3])>=425 and x[7][:4] == cet4[0][:4]])/len(cet4[1])*100,2))+"%"
+            maxs = max(cet4[1],key=lambda x:x[3])[3]
+            rv = [x[3] for x in cet4[1] if x[3] != "0"]
+            mins = min(rv)
+            avg = round(sum([int(x[3]) for x in cet4[1]])/len(cet4[1]),2)
+            everylevel.append([ cet4[0][:4],passrate,maxs,mins,avg ])
+        everylevel.reverse()
+        print(everylevel)
+        #绘制图表
+        with plt.style.context('fivethirtyeight'):
+            xv = [everylevel.index(x)+1 for x in everylevel]
+            plt.xticks(xv,[x[0]+"级" for x in everylevel])
+            plt.plot(xv,[float(x[1].replace("%",'')) for x in everylevel])
+            plt.title(GRAPH_TITLE+"第一次四级通过率对比图 - by Kanch",fontproperties=font_set)
+            plt.xlabel("年级",fontproperties=font_set)
+            plt.ylabel("四级通过率(%)",fontproperties=font_set)
+            plt.show()
+            #绘制最高分以及最低分图
+            plt.xticks(xv,[x[0]+"级" for x in everylevel])
+            plt.plot(xv,[x[2] for x in everylevel],label="Max Score")  #最高得分
+            plt.plot(xv,[x[3] for x in everylevel],label="Min Score (excluding 0)")  #最低分（除0）
+            plt.plot(xv,[x[4] for x in everylevel],label="Average Score")  #平均分
+            plt.title(GRAPH_TITLE+"第一次四级最高分与最低分与平均分对比图 - by Kanch",fontproperties=font_set)
+            plt.xlabel("年级",fontproperties=font_set)
+            plt.ylabel("考试分数",fontproperties=font_set)
+            plt.legend(loc='upper right')
+            plt.show()
+
         
