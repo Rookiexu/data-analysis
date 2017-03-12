@@ -250,7 +250,7 @@ if True:
             #[考试时间,类型,缺考,总分,听力,阅读,写作,学号]
             if(len(cet4[1])) == 0 or cet4[0][4:6]!="12":
                 continue
-            passrate = str(round(len([x[3] for x in cet4[1] if int(x[3])>=425 and x[7][:4] == cet4[0][:4]])/len(cet4[1])*100,2))+"%"
+            passrate = str(round(len([x[3] for x in cet4[1] if int(x[3])>=425 and x[7][:4] == cet4[0][:4]])/len([x[3] for x in cet4[1] if x[7][:4] == cet4[0][:4]])*100,2))+"%"
             maxs = max(cet4[1],key=lambda x:x[3])[3]
             rv = [x[3] for x in cet4[1] if x[3] != "0"]
             mins = min(rv)
