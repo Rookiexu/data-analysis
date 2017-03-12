@@ -254,7 +254,8 @@ if True:
             maxs = max(cet4[1],key=lambda x:x[3])[3]
             rv = [x[3] for x in cet4[1] if x[3] != "0"]
             mins = min(rv)
-            avg = round(sum([int(x[3]) for x in cet4[1]])/len(cet4[1]),2)
+            tv = [int(x[3]) for x in cet4[1] if int(x[3]) != 0]
+            avg = round(sum(tv)/len(tv),2)
             everylevel.append([ cet4[0][:4],passrate,maxs,mins,avg ])
         everylevel.reverse()
         print(everylevel)
@@ -271,11 +272,11 @@ if True:
             plt.xticks(xv,[x[0]+"级" for x in everylevel])
             plt.plot(xv,[x[2] for x in everylevel],label="Max Score")  #最高得分
             plt.plot(xv,[x[3] for x in everylevel],label="Min Score (excluding 0)")  #最低分（除0）
-            plt.plot(xv,[x[4] for x in everylevel],label="Average Score")  #平均分
+            plt.plot(xv,[x[4] for x in everylevel],label="Average Score (excluding 0)")  #平均分
             plt.title(GRAPH_TITLE+"第一次四级最高分与最低分与平均分对比图 - by Kanch",fontproperties=font_set)
             plt.xlabel("年级",fontproperties=font_set)
             plt.ylabel("考试分数",fontproperties=font_set)
-            plt.legend(loc='middle right')
+            plt.legend(loc='best')
             plt.show()
 
         

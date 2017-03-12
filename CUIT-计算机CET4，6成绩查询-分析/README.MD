@@ -42,4 +42,4 @@ http://akakanch.com/archives/661
 
 ### 版本
 
-v1.0 @ 2017-3-5
+v1.0 @ 2017-3-12
