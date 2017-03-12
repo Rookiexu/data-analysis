@@ -6,7 +6,11 @@ from bs4 import BeautifulSoup
 exam_season = [
     20161217,
     20160618,
-    20151219
+    20151219,
+    20150613,
+    20141220,
+    20140614,
+    20131214
 ]
 
 exam_type = [
