@@ -285,3 +285,4 @@ verifyMail.py
 # non-essential files
 env/Lib/site-packages/
 site-packages/
+postdata.csv
