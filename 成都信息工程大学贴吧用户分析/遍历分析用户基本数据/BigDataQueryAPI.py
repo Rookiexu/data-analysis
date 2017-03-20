@@ -37,7 +37,7 @@ def searchForUser(xid):
     DBCONN = SQL.connect(host=DBS.HOST_CH, port=3306,user=DBS.USER_CH,passwd=DBS.PASSWORLD_CH,db=DBS.NAME_CH,charset='UTF8')
     DBCONN.set_charset('utf8mb4')
     DBCUR = DBCONN.cursor()
-    SEL = "SELECT * FROM `tieba_bigdata` WHERE ID= \"" + str(xid) + "\""
+    SEL = "SELECT * FROM `tieba_user_bigdate` WHERE ID= \"" + str(xid) + "\""
     DBCUR.execute(SEL)
     DBCONN.commit()
     result = DBCUR.fetchall()
