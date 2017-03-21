@@ -42,6 +42,8 @@ SEL = "SELECT USERNAME FROM `tieba_user_bigdate` WHERE 1"
 DBCUR.execute(SEL)
 DBCONN.commit()
 existlist = DBCUR.fetchall()
+existlist = [x[0] for x in existlist]
+print(existlist[:5])
 print(len(existlist),"users exist,they will be skipped.")
 print("submitting data...")
 INS_SUFFIX = "INSERT INTO `tieba_user_bigdate`( `USERNAME`, `POSTTOTAL`, `POST30DAYS`,`ACTIVETIMELINE`, `ACTIVETIMEZONE`,\
