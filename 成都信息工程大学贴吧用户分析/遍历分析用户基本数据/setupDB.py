@@ -36,17 +36,29 @@ print("conecting to the database...")
 DBCONN = SQL.connect(host=DBS.HOST_CH, port=3306,user=DBS.USER_CH,passwd=DBS.PASSWORLD_CH,db=DBS.NAME_CH,charset='UTF8')
 DBCUR = DBCONN.cursor()
 DBCUR.execute("SET names 'utf8mb4'")
+#首先要获取数据库中已经存在的用户,方便跳过
+print("retriving exist user list...")
+SEL = "SELECT USERNAME FROM `tieba_user_bigdate` WHERE 1"
+DBCUR.execute(SEL)
+DBCONN.commit()
+existlist = DBCUR.fetchall()
+print(len(existlist),"users exist,they will be skipped.")
 print("submitting data...")
 INS_SUFFIX = "INSERT INTO `tieba_user_bigdate`( `USERNAME`, `POSTTOTAL`, `POST30DAYS`,`ACTIVETIMELINE`, `ACTIVETIMEZONE`,\
              `USERRELATION`, `REPLYKEYWORD`, `RESERVE`) VALUES ("
 i = 0
+skips = 0
 sumx = len(distinctUserList)
 for user in distinctUserList:
-    INS =INS_SUFFIX + "\"" + user + "\",0,0,\"\",\"\",\"\",\"\",\"\")"
-    DBCUR.execute(INS)
-    DBCONN.commit()
-    i+=1
-    print("submiting...",i,"/",sumx,end='\r')
-print("\ndone.")
+    if user not in existlist:
+        INS =INS_SUFFIX + "\"" + user + "\",0,0,\"\",\"\",\"\",\"\",\"\")"
+        DBCUR.execute(INS)
+        i+=1
+    else:
+        skips+=1
+    print("submiting...",i,"/",sumx,"(",skips,"skipped)",end='\r')
+print("\ncommiting...")
+DBCONN.commit()
+print("done.")
 DBCUR.close()
 DBCONN.close()
