@@ -50,34 +50,27 @@ for post in result:
         print(info,"skipped.",end='\t')
         continue
     procesed.append(post[2])
-    #获取该用户在数据库里面的ID
-    #读取所有用户信息
-    SEL = "SELECT ID FROM `tieba_user_bigdate` WHERE USERNAME=\"" + post[2] +"\""
-    DBCUR.execute(SEL)
-    DBCONN.commit()
-    print(info,"\tretrive id...",end='\r')
-    xid = DBCUR.fetchall()[0][0]
-    print(info,"\tid retrived,id=",xid,end='\r')
+    username = post[2]
     print(info,"\tstart process...",end='\r')
     #首先获得该用户的累计发帖量与30天发帖量
     print(info,"\tget total posts and latest 30 days post...",end='\r')
-    count,count30 = QueryAPI.getTotalPostsSum(xid)
+    count,count30 = QueryAPI.getTotalPostsSum(username)
     #其次分析该用户的活跃时间段
     print(info,"\tanalyzing active timeline...",end='\r')
-    azone = QueryAPI.getActivityTimeZone(xid)
+    azone = QueryAPI.getActivityTimeZone(username)
     #在分析其90天的活跃度
     print(info,"\tanalyzing active timezone...",end='\r')
-    at90 = QueryAPI.getActivityTimeLine(xid,90)
+    at90 = QueryAPI.getActivityTimeLine(username,90)
     #然后分析用户关系链
     print(info,"\tanalyzing user relation...",end='\r')
-    ur = QueryAPI.getReadlationCircle(xid)
+    ur = QueryAPI.getReadlationCircle(username)
     #然后分析该用户的常用关键字
     print(info,"\tanalyzing keyword...",end='\r')
-    kmap = QueryAPI.getKeymap(xid)
+    kmap = QueryAPI.getKeymap(username)
     #基本信息分析完成，储存信息到文件
     #储存为csv文件，格式如下：
     #id，累计发帖量，近30天发帖量，活跃度，活跃时间段，用户关系链，常用关键字，保留
-    wstr = [str(xid),str(count),str(count30),at90,azone,ur,kmap,"1"]
+    wstr = [str(username),str(count),str(count30),at90,azone,ur,kmap,"1"]
     #print(wstr)
     xresult.append(wstr)
 print("\nsaving....")

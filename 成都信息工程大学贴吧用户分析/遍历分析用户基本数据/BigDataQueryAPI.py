@@ -5,26 +5,11 @@ import time
 import jieba.analyse as ANALYSE
 import datetime
 
-#该函数根据给定id，在bigdata数据库中查找指定用户
-def searchForUser(xid):
-    DBCONN = SQL.connect(host=DBS.HOST_CH, port=3306,user=DBS.USER_CH,passwd=DBS.PASSWORLD_CH,db=DBS.NAME_CH,charset='UTF8')
-    DBCONN.set_charset('utf8mb4')
-    DBCUR = DBCONN.cursor()
-    SEL = "SELECT * FROM `tieba_user_bigdate` WHERE ID=" + str(xid)
-    #print(SEL)
-    DBCUR.execute(SEL)
-    DBCONN.commit()
-    result = DBCUR.fetchall()
-    DBCUR.close()
-    DBCONN.close()
-    if len(result) == 0:
-        return 'NOTFOUND' #未查找到用户
-    return result[0][1]
 
 
 #查询用户的发帖量，给定用户id（已经查询过的ID，然后返回总发帖量和最近30天发帖量）
-def getTotalPostsSum(xid):
-    count,count30 = Query.countSergent(searchForUser(xid))
+def getTotalPostsSum(username):
+    count,count30 = Query.countSergent(username)
     return count ,count30
 
 #该函数用于按时间排序spostdate
@@ -56,10 +41,10 @@ def gatherbyDays(sortandgetdata):
     return days
 
 #获取用户活跃时间段
-def getActivityTimeZone(xid):
+def getActivityTimeZone(username):
     spostdate = []
     begdate = Query.queryDatasourceEarlyTime()
-    spostdate = Query.queryContainListAfterTime(searchForUser(xid),str(begdate))
+    spostdate = Query.queryContainListAfterTime(username,str(begdate))
     llen = len(spostdate)
     #开始统计词频
     tpostdata = sortandget(spostdate)
@@ -95,14 +80,14 @@ def getCountByDate(date,datalist):
             ct+=1
     return ct
 #获取用户活跃时度
-def getActivityTimeLine(xid,days):
+def getActivityTimeLine(username,days):
     enddate = Query.queryDatasourceLatestTime()
     spostdate = []
     if days > 0:
         begdate = enddate - datetime.timedelta(days=days)
     else:
         begdate = Query.queryDatasourceEarlyTime()
-    spostdate = Query.queryContainListAfterTime(searchForUser(xid),str(begdate))
+    spostdate = Query.queryContainListAfterTime(username,str(begdate))
     llen = len(spostdate)
     #开始统计词频
     feqlist = []
@@ -138,8 +123,8 @@ def getActivityTimeLine(xid,days):
     return [timeline,feqlist]
 
 #获取用户关系链
-def getReadlationCircle(xid):
-    userlist = Query.queryUserListbyReplyto(searchForUser(xid))
+def getReadlationCircle(username):
+    userlist = Query.queryUserListbyReplyto(username)
     statis = []
     replygotsum = len(userlist)
     for user in userlist:
@@ -172,8 +157,8 @@ def getReadlationCircle(xid):
 
 
 #获取用户关键字
-def getKeymap(xid):
-    spostdate = Query.queryWordContainListbyAuthor(searchForUser(xid))
+def getKeymap(username):
+    spostdate = Query.queryWordContainListbyAuthor(username)
     llen = len(spostdate)
     dp = ""
     #开始统计关键词
@@ -196,6 +181,3 @@ def getKeymap(xid):
         ttt+=1
     return [kd,feqlist]
 
-#获取用户标签
-def getTags(xid,seesion):
-    pass
