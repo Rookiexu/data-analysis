@@ -55,12 +55,11 @@ for user in distinctUserList:
     if user not in existlist:
         INS =INS_SUFFIX + "\"" + user + "\",0,0,\"\",\"\",\"\",\"\",\"\")"
         DBCUR.execute(INS)
+        DBCONN.commit()
         i+=1
     else:
         skips+=1
     print("submiting...",i,"/",sumx,"(",skips,"skipped)",end='\r')
-print("\ncommiting...")
-DBCONN.commit()
 print("done.")
 DBCUR.close()
 DBCONN.close()

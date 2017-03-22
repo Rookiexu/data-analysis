@@ -186,7 +186,8 @@ def getReadlationCircle(xid):
     psum = 0
     label = []
     value = []
-    while i<10:
+    while i<10 and len(statis)>0:
+        print(statis)
         label.append(statis[i][0])
         value.append(statis[i][1])
         count = statis[i][1]
@@ -213,7 +214,6 @@ def getKeymap(xid):
     for keyword in kd:
         print(keyword,end="\t")
         feqlist.append(0)
-    print("\n\n")
     #显示条形图
     #统计词频
     ttt = 0
