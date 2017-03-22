@@ -42,7 +42,7 @@ sumx = len(result)
 xresult = []
 for post in result:
     i+=1
-    info = "process..." + str(i) + "/" + str(sumx) + "(skipped:" + str(skipped) +")"
+    info = "process..." + str(i) + "/" + str(sumx) + "(skipped:" + str(skipped) +")" + post[2] + "\t"
     print(info,end='\r')
     #获取一个用户信息，然后开始分析，接着插入数据库
     if post[2] in procesed or post[2] in analyzeduserlist:
@@ -56,7 +56,7 @@ for post in result:
     DBCUR.execute(SEL)
     DBCONN.commit()
     print(info,"\tretrive id...",end='\r')
-    xid = DBCUR.fetchall()[0]
+    xid = DBCUR.fetchall()[0][0]
     print(info,"\tid retrived,id=",xid,end='\r')
     print(info,"\tstart process...",end='\r')
     #首先获得该用户的累计发帖量与30天发帖量

@@ -120,7 +120,7 @@ def queryContainListAfterTime(author,earlydatestr):
     DBCUR.execute(SEL)
     DBCONN.commit()
     datalist = DBCUR.fetchall()
-    print(len(datalist))
+    #print(len(datalist))
     DBCUR.close()
     DBCONN.close()
     return datalist

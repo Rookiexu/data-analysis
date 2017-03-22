@@ -5,39 +5,13 @@ import time
 import jieba.analyse as ANALYSE
 import datetime
 
-#检查hash验证码是否正确
-def checkSession(sessiondata):
-    DBCONN = SQL.connect(host=DBS.HOST_CH, port=3306,user=DBS.USER_CH,passwd=DBS.PASSWORLD_CH,db=DBS.NAME_CH,charset='UTF8')
-    DBCONN.set_charset('utf8mb4')
-    DBCUR = DBCONN.cursor()
-    SEL = "SELECT * FROM `bigdata_verify_mail` WHERE SHA1= \"" + sessiondata + "\""
-    DBCUR.execute(SEL)
-    DBCONN.commit()
-    result = DBCUR.fetchall()
-    if len(result) == 0:
-        return False  
-    timetick = time.time()
-    if result[0][5] == True: #判断是否已经验证过
-        if result[0][6] == True:
-            return False
-        return 1
-    if result[0][4] + 86400 < timetick:
-        UPD = "UPDATE  `bigdata_verify_mail` SET `OUTOFDATE`=True where ID=" + str(result[0][0])
-        DBCUR.execute(UPD)
-        DBCONN.commit()
-        DBCUR.close()
-        DBCONN.close()
-        return False   #-2为验证过期
-    DBCUR.close()
-    DBCONN.close()
-    return True  #成功返回1
-
 #该函数根据给定id，在bigdata数据库中查找指定用户
 def searchForUser(xid):
     DBCONN = SQL.connect(host=DBS.HOST_CH, port=3306,user=DBS.USER_CH,passwd=DBS.PASSWORLD_CH,db=DBS.NAME_CH,charset='UTF8')
     DBCONN.set_charset('utf8mb4')
     DBCUR = DBCONN.cursor()
-    SEL = "SELECT * FROM `tieba_user_bigdate` WHERE ID= \"" + str(xid) + "\""
+    SEL = "SELECT * FROM `tieba_user_bigdate` WHERE ID=" + str(xid)
+    #print(SEL)
     DBCUR.execute(SEL)
     DBCONN.commit()
     result = DBCUR.fetchall()
@@ -187,7 +161,6 @@ def getReadlationCircle(xid):
     label = []
     value = []
     while i<10 and len(statis)>0:
-        print(statis)
         label.append(statis[i][0])
         value.append(statis[i][1])
         count = statis[i][1]
@@ -212,7 +185,7 @@ def getKeymap(xid):
     feqlist = []
     sumfeq = 0
     for keyword in kd:
-        print(keyword,end="\t")
+        #print(keyword,end="\t")
         feqlist.append(0)
     #显示条形图
     #统计词频
