@@ -145,14 +145,25 @@ def getReadlationCircle(username):
     psum = 0
     label = []
     value = []
-    while i<10 and len(statis)>0:
-        label.append(statis[i][0])
-        value.append(statis[i][1])
-        count = statis[i][1]
-        per = count/replygotsum*100
-        psum += per
-        sum += count
-        i+=1
+    if len(statis)>0:
+        if len(statis) >= 10:
+            while i<10:
+                label.append(statis[i][0])
+                value.append(statis[i][1])
+                count = statis[i][1]
+                per = count/replygotsum*100
+                psum += per
+                sum += count
+                i+=1
+        else:
+            for sta in statis:
+                label.append(sta[0])
+                value.append(sta[1])
+                count = sta[1]
+                per = count/replygotsum*100
+                psum += per
+                sum += count
+                i+=1         
     return [label,value]
 
 
