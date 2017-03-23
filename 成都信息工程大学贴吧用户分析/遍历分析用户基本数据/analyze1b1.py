@@ -18,6 +18,7 @@ for line in wr:
         result.append(line)
 f.close()
 print('done.\ndata retrived:',len(result))
+QueryAPI.setDataset(result)
 print('start analyzing.')
 #连接数据库
 print("conecting to the database...")

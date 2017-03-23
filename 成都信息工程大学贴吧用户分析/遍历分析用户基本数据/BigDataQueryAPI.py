@@ -1,11 +1,10 @@
-import QueryFunctions as Query
-import database as DBS
-import pymysql as SQL
+import QueryFunctionsLocal as Query
 import time
 import jieba.analyse as ANALYSE
 import datetime
 
-
+def setDataset(dsd):
+    Query.setDataSet(dsd)
 
 #查询用户的发帖量，给定用户id（已经查询过的ID，然后返回总发帖量和最近30天发帖量）
 def getTotalPostsSum(username):
