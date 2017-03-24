@@ -18,7 +18,9 @@ for line in wr:
         result.append(line)
 f.close()
 print('done.\ndata retrived:',len(result))
+print('setting data...')
 QueryAPI.setDataset(result)
+print('done.')
 print('start analyzing.')
 #连接数据库
 print("conecting to the database...")
@@ -43,7 +45,7 @@ sumx = len(result)
 xresult = []
 for post in result:
     i+=1
-    info = "process..." + str(i) + "/" + str(sumx) + "(skipped:" + str(skipped) +")" + post[2] + "\t"
+    info = "process..." + str(i) + "/" + str(sumx) + "(skipped:" + str(skipped) +")" # + post[2] + "\t"
     print(info,end='\r')
     #获取一个用户信息，然后开始分析，接着插入数据库
     if post[2] in procesed or post[2] in analyzeduserlist:
@@ -54,7 +56,7 @@ for post in result:
     username = post[2]
     print(info,"\tstart process...",end='\r')
     #首先获得该用户的累计发帖量与30天发帖量
-    print(info,"\tget total posts and latest 30 days post...",end='\r')
+    print(info,"\tget posts sum and 30 days sum...",end='\r')
     count,count30 = QueryAPI.getTotalPostsSum(username)
     #其次分析该用户的活跃时间段
     print(info,"\tanalyzing active timeline...",end='\r')
@@ -75,7 +77,7 @@ for post in result:
     #print(wstr)
     xresult.append(wstr)
 print("\nsaving....")
-f = open("result.csv","w")
+f = open("result.csv","wb",encoding='utf-8',errors='ignore')
 csvw = csv.writer(f)
 csvw.writerows(xresult)
 f.close()

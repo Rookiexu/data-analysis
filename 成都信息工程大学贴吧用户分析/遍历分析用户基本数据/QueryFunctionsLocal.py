@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 #
 #
@@ -7,8 +7,8 @@ from datetime import datetime
 #全局变量，用来存放数据集，需要使用setDataSet函数设置数据集
 
 DATA_SET = []
-MAX_DATE = None
-MIN_DATE = None
+MAX_DATE = []
+MIN_DATE = []
 #result中的子项目结构：
 #[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
 #   0          1           2        3           4         5
@@ -16,12 +16,21 @@ MIN_DATE = None
 #设置数据集
 def setDataSet(dbs):
     DATA_SET = dbs
+    datalist = []
+    for post in DATA_SET:
+        ##result中的子项目结构：
+        #[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
+        #   0          1           2        3           4         5
+        #print(post[4])
+        datalist.append(datetime.datetime.strptime(post[4],"%Y-%m-%d %H:%M:%S"))
+    MAX_DATE.append(max(datalist))
+    MIN_DATE.append(min(datalist))
 
 #该函数用来查询指定字段在数据库中的出现次数
 def countSergent(value):
     latestdate = queryDatasourceLatestTime()
     begdate = latestdate - datetime.timedelta(days=30)
-    count30 = [x[2] for x in DATA_SET if x[2]==value and datetime.strptime(x[4],"%Y-%m-%d %H:%M")>begdate]
+    count30 = [x[2] for x in DATA_SET if x[2]==value and datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>begdate]
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
     count = [x[2] for x in DATA_SET if x[2]==value]
     return len(count),len(count30)
@@ -60,32 +69,20 @@ def queryContentListbyAuthorToReplyto(fromauthor,toauthor):
 #从数据库查询最大日期
 #返回值：一个最大日期
 def queryDatasourceLatestTime():
-    datalist = []
-    for post in DATA_SET:
-        ##result中的子项目结构：
-        #[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-        #   0          1           2        3           4         5
-        datalist.append(datetime.strptime(post[4],"%Y-%m-%d %H:%M"))
-    return max(datalist)
+    return MAX_DATE[0]
 
 #从数据库查询小日期
 #返回值：一个最小日期
 def queryDatasourceEarlyTime():
-    datalist = []
-    for post in DATA_SET:
-        ##result中的子项目结构：
-        #[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-        #   0          1           2        3           4         5
-        datalist.append(datetime.strptime(post[4],"%Y-%m-%d %H:%M"))
-    return min(datalist)
+    return MIN_DATE[0]
 
 #从数据库查询指定作者的指定日期之间的数据集
 #返回值：指定日期之间的数据集列表
 # [ [主题帖链接,贴吧名,作者,帖子内容,发帖时间,回复给sb,所在页面],[......],..... ]
 def queryContainListAfterTime(author,earlydatestr):
-    earlydate = datetime.strptime(earlydatestr,"%Y-%m-%d %H:%M")
+    earlydate = datetime.datetime.strptime(earlydatestr,"%Y-%m-%d %H:%M:%S")
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x for x in DATA_SET if datetime.strptime(x[4],"%Y-%m-%d %H:%M")>earlydate and author == x[2]]
+    datalist = [x for x in DATA_SET if datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>earlydate and author == x[2]]
     #print(len(datalist))
     return datalist
 
