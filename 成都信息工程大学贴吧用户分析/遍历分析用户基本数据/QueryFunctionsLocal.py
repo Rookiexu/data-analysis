@@ -15,9 +15,9 @@ MIN_DATE = []
 
 #设置数据集
 def setDataSet(dbs):
-    DATA_SET = dbs
+    DATA_SET.append( dbs )
     datalist = []
-    for post in DATA_SET:
+    for post in DATA_SET[0]:
         ##result中的子项目结构：
         #[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
         #   0          1           2        3           4         5
@@ -30,16 +30,17 @@ def setDataSet(dbs):
 def countSergent(value):
     latestdate = queryDatasourceLatestTime()
     begdate = latestdate - datetime.timedelta(days=30)
-    count30 = [x[2] for x in DATA_SET if x[2]==value and datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>begdate]
+    count30 = [x[2] for x in DATA_SET[0] if x[2]==value and datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>begdate]
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    count = [x[2] for x in DATA_SET if x[2]==value]
+    count = [x[2] for x in DATA_SET[0] if x[2]==value]
+    #print(count,len(DATA_SET[0]))
     return len(count),len(count30)
 
 #从数据库查询包含指定字词的所有数据集
 #返回值：包含指定字词的数据集列表
 def queryWordContainListbyKeyword(word):
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x[3] for x in DATA_SET if x[3].find(word)>-1]
+    datalist = [x[3] for x in DATA_SET[0] if x[3].find(word)>-1]
     return datalist
 
 #从数据库查询指定作者的所有帖子信息
@@ -47,7 +48,7 @@ def queryWordContainListbyKeyword(word):
 # [ [主题帖链接,贴吧名,作者,帖子内容,发帖时间,回复给sb,所在页面],[......],..... ]
 def queryWordContainListbyAuthor(author):
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x for x in DATA_SET if x[2]==author]
+    datalist = [x for x in DATA_SET[0] if x[2]==author]
     return datalist
 
 #从数据库查询回复给指定用户的所有其它用户列表
@@ -55,7 +56,7 @@ def queryWordContainListbyAuthor(author):
 # [ "1","2",....]
 def queryUserListbyReplyto(author):
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x[2] for x in DATA_SET if x[5]==author]
+    datalist = [x[2] for x in DATA_SET[0] if x[5]==author]
     return datalist
 
 #从数据库查询指定用户回复给指定用户的帖子列表
@@ -63,7 +64,7 @@ def queryUserListbyReplyto(author):
 # [ "1","2",....]
 def queryContentListbyAuthorToReplyto(fromauthor,toauthor):
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x[3] for x in DATA_SET if x[2]==fromauthor and x[5]==toauthor]
+    datalist = [x[3] for x in DATA_SET[0] if x[2]==fromauthor and x[5]==toauthor]
     return datalist
 
 #从数据库查询最大日期
@@ -82,7 +83,6 @@ def queryDatasourceEarlyTime():
 def queryContainListAfterTime(author,earlydatestr):
     earlydate = datetime.datetime.strptime(earlydatestr,"%Y-%m-%d %H:%M:%S")
     ##[帖子ID    储存贴吧名   回帖作者  回帖内容    回帖日期    回帖目标]
-    datalist = [x for x in DATA_SET if datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>earlydate and author == x[2]]
-    #print(len(datalist))
+    datalist = [x for x in DATA_SET[0] if datetime.datetime.strptime(x[4],"%Y-%m-%d %H:%M:%S")>earlydate and author == x[2]]
     return datalist
 

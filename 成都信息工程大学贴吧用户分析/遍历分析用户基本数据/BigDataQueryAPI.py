@@ -19,22 +19,25 @@ def gatherbyDays(sortandgetdata):
     days = [] # [  [date,[ countlist ]    ],    ]
     #建立索引
     for post in sortandgetdata:
+        post4 = datetime.datetime.strptime(post[4],"%Y-%m-%d %H:%M:%S")
         if len(days) != 0:
             NO_FOUND = True
             for ddata in days:
-                if ddata[0].year == post[4].year and ddata[0].month == post[4].month and ddata[0].day == post[4].day:
+                if ddata[0].year == post4.year and ddata[0].month == post4.month and\
+                                                     ddata[0].day == post4.day:
                     NO_FOUND = False
                     break
             if NO_FOUND == True:
-                days.append([post[4],[]])
+                days.append([post4,[]])
         else:
-            days.append([post[4],[]])
+            days.append([post4,[]])
     #开始统计
     x = 0
     for ddata in days:
         for post in sortandgetdata:
-            if ddata[0].year==post[4].year and ddata[0].month==post[4].month and ddata[0].day == post[4].day:
-                timed = post[4].time()
+            post4 = datetime.datetime.strptime(post[4],"%Y-%m-%d %H:%M:%S")
+            if ddata[0].year==post4.year and ddata[0].month==post4.month and ddata[0].day == post4.day:
+                timed = post4.time()
                 days[x][1].append(timed)
         x+=1
     return days
@@ -74,7 +77,7 @@ def getCountByDate(date,datalist):
     ct = 0
     for post in datalist:
         #[[内容,时间],[...],...]
-        ddate = post[4]
+        ddate = datetime.datetime.strptime(post[4],"%Y-%m-%d %H:%M:%S")
         if datedate.year == ddate.year and datedate.month == ddate.month and datedate.day == ddate.day:
             ct+=1
     return ct

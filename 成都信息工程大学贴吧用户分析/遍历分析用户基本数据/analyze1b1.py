@@ -50,34 +50,35 @@ for post in result:
     #获取一个用户信息，然后开始分析，接着插入数据库
     if post[2] in procesed or post[2] in analyzeduserlist:
         skipped += 1
-        print(info,"skipped.",end='\t')
+        print(info,"skipped.                        ",end='\r')
         continue
     procesed.append(post[2])
     username = post[2]
-    print(info,"\tstart process...",end='\r')
+    print(info,"\tstart process...                 ",end='\r')
     #首先获得该用户的累计发帖量与30天发帖量
     print(info,"\tget posts sum and 30 days sum...",end='\r')
     count,count30 = QueryAPI.getTotalPostsSum(username)
     #其次分析该用户的活跃时间段
-    print(info,"\tanalyzing active timeline...",end='\r')
+    print(info,"\tanalyzing active timeline...     ",end='\r')
     azone = QueryAPI.getActivityTimeZone(username)
     #在分析其90天的活跃度
-    print(info,"\tanalyzing active timezone...",end='\r')
+    print(info,"\tanalyzing active timezone...      ",end='\r')
     at90 = QueryAPI.getActivityTimeLine(username,90)
     #然后分析用户关系链
-    print(info,"\tanalyzing user relation...",end='\r')
+    print(info,"\tanalyzing user relation...        ",end='\r')
     ur = QueryAPI.getReadlationCircle(username)
     #然后分析该用户的常用关键字
-    print(info,"\tanalyzing keyword...",end='\r')
+    print(info,"\tanalyzing keyword...               ",end='\r')
     kmap = QueryAPI.getKeymap(username)
     #基本信息分析完成，储存信息到文件
     #储存为csv文件，格式如下：
     #id，累计发帖量，近30天发帖量，活跃度，活跃时间段，用户关系链，常用关键字，保留
     wstr = [str(username),str(count),str(count30),at90,azone,ur,kmap,"1"]
     #print(wstr)
+    #break
     xresult.append(wstr)
 print("\nsaving....")
-f = open("result.csv","wb",encoding='utf-8',errors='ignore')
+f = open("result.csv","w",encoding='utf-8',errors='ignore')
 csvw = csv.writer(f)
 csvw.writerows(xresult)
 f.close()
