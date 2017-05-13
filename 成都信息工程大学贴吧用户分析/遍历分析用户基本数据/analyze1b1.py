@@ -37,8 +37,6 @@ csvw = csv.writer(f)
 differuserlist = []
 i = 0
 print("finding user ",end='\r')
-#differuserlist = [line[2] for line in wr if (len(line) > 3 and (line[2] not in analyzeduserlist) and (line[2] not in differuserlist))]
-print("done ",end='\n\n')
 for line in wr:
     print("finding user ",i,end='\r')
     if len(line) > 3:
@@ -48,6 +46,7 @@ for line in wr:
         i+=1
 dlen = len(differuserlist)
 print('\n',dlen," users found!")
+
 #再根据用户数进行遍历，多次在文件内进行查找用户信息
 i = 0
 xresult = []
@@ -57,7 +56,7 @@ for username in differuserlist:
     sum_ur = []
     sum_kmap = []
     sum_azone = []
-    print("processing..." , str(i) , "/" , dlen,end='\t')
+    print("processing..." , str(i) , "/" , dlen,end='\r')
     #以上几个变量是用于算总量的,下面的代码用于循环读取文件内容并分析（从节约内存的角度考虑，我们需要循环读取）
     f.seek(0) # seek to the begining of the file
     m = 0
@@ -74,26 +73,26 @@ for username in differuserlist:
         if x == 0: #when i = 0 which means eof met.
             break
         #对读取到的数据进行分段分析
-        print("reading.... round" , str(m) ,end='\r')
         #首先获得该用户的累计发帖量与30天发帖量
-        count = Analyzer.getTotalPostsSum(username,dataset)
+        sum_count += Analyzer.getTotalPostsSum(username,dataset)
         #其次分析该用户的活跃时间段
-        azone = Analyzer.getActivityTimeZone(username,dataset)
+        #azone = Analyzer.getActivityTimeZone(username,dataset)
         #在分析其90天的活跃度
-        at90 = Analyzer.getActivityTimeLine(username,90,dataset)
+        #at90 = Analyzer.getActivityTimeLine(username,90,dataset)
         #然后分析用户关系链
-        ur = Analyzer.getReadlationCircle(username,dataset)
+        #ur = Analyzer.getReadlationCircle(username,dataset)
         #然后分析该用户的常用关键字
-        kmap = Analyzer.getKeymap(username,dataset)
+        #kmap = Analyzer.getKeymap(username,dataset)
         #=======================基本信息分析完成，汇总数据=============================
-        sum_count += count
+        #sum_count += count
     #id，累计发帖量，近30天发帖量，活跃度，活跃时间段，用户关系链，常用关键字，保留
     wstr = [str(username),str(sum_count),"0",sum_at90,sum_azone,sum_ur,sum_kmap,"1"]
     xresult.append(wstr)
     i+=1
-print("\nsaving....")
-csvw.writerows(xresult)
+#[print(x[1],end='\t') for x in xresult]
+#print("\nsaving....")
+#csvw.writerows(xresult)
 
-print("\ndone.")
+#print("\ndone.")
 f.close()
 f.close()

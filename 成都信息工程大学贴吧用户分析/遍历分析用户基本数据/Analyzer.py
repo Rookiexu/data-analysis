@@ -5,10 +5,13 @@
 #用于分析本地数据的python脚本
 #获取某一用户的发帖总数，由于采用了分段处理，故，这里每次返回给定dataset中的数量
 def getUserPostSum(username,dataset):
-    pass
+    return len([x for x in dataset if x[2]==username])
 
-def getActiveTimeZone(username,days,dataset):
-    pass
+def getActiveTimeZone(username,dataset):
+    feqlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    #time format:2017-03-05 10:36:00
+    
+
 
 def getReadlationCircle(username,dataset):
     pass
@@ -16,5 +19,5 @@ def getReadlationCircle(username,dataset):
 def getKeymap(username,dataset):
     pass
 
-def getActivityTimeLine(username,dataset):
+def getActivityTimeLine(username,days,dataset):
     pass
