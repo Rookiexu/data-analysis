@@ -34,27 +34,27 @@
 
 先来看看电子技术和平均成绩的关系，嗯，电子技术老师普遍给分都超级高，虽然刚开学的时候说的这门课要求怎么怎么严格，刀子嘴豆腐心啊。赞一个。这一门所有人的起点都是一样的哈哈哈。
 
-![电子技术和平均成绩](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80VS%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9.jpg)
+![电子技术和平均成绩](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80VS%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9.jpg)
 
 至于离散数学呢，基本和平均成绩相关的，所以，看大家平时学习态度如何而不是靠期末突击考高分，我相信，看离散数学基本就可以看出个大概。
 
-![离散数学和平均成绩](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E7%A6%BB%E6%95%A3vs%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9.jpg)
+![离散数学和平均成绩](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E7%A6%BB%E6%95%A3vs%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9.jpg)
 
 这里，我们将每一位同学的不加选修（专业和公共）绩点提出来分析。可以看到，大多数人基本都被选修拉高了绩点，比如说我。
 
 下面那张饼状图显示了选修影响绩点的计数，`+`选修提高绩点，`-`选修拉低绩点，`=`绩点不变
 
-![总绩点和不算选修的绩点](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E7%A6%BB%E6%95%A3vs%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9.jpg)
+![总绩点和不算选修的绩点](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E6%80%BB%E7%BB%A9%E7%82%B9%E4%B8%8E%E4%B8%8D%E7%AE%97%E9%80%89%E4%BF%AE%E7%9A%84%E7%BB%A9%E7%82%B9.jpg)
 
-![选修影响计数](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E9%80%89%E4%BF%AE%E5%BD%B1%E5%93%8D%E8%AE%A1%E6%95%B0.jpg)
+![选修影响计数](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E9%80%89%E4%BF%AE%E5%BD%B1%E5%93%8D%E8%AE%A1%E6%95%B0.jpg)
 
 最后，还有个李莉丽班级和卿静班级的成绩对比.
 
-（这里只显示了一张，详细的可以下载 [分析结果/成绩分析-图表plus解释.pdf](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E6%88%90%E7%BB%A9%E5%88%86%E6%9E%90-%E5%9B%BE%E8%A1%A8plus%E8%A7%A3%E9%87%8A.pdf) 查看全文）
+（这里只显示了一张，详细的可以下载 [分析结果/成绩分析-图表plus解释.pdf](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E6%88%90%E7%BB%A9%E5%88%86%E6%9E%90-%E5%9B%BE%E8%A1%A8plus%E8%A7%A3%E9%87%8A.pdf) 查看全文）
 
-![工程实践，卿静VS李莉丽](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/QQ%E6%88%AA%E5%9B%BE20170218203056.jpg)
+![工程实践，卿静VS李莉丽](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/QQ%E6%88%AA%E5%9B%BE20170218203056.jpg)
 
-##### 还有更多内容请下载[分析结果/成绩分析-图表plus解释.pdf](https://github.com/ankanch/data-analysis/blob/master/2017%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E6%88%90%E7%BB%A9%E5%88%86%E6%9E%90-%E5%9B%BE%E8%A1%A8plus%E8%A7%A3%E9%87%8A.pdf) 查看全文
+##### 还有更多内容请下载[分析结果/成绩分析-图表plus解释.pdf](https://github.com/ankanch/data-analysis/raw/master/CUIT-2017%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E6%88%90%E7%BB%A9%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/%E6%88%90%E7%BB%A9%E5%88%86%E6%9E%90-%E5%9B%BE%E8%A1%A8plus%E8%A7%A3%E9%87%8A.pdf) 查看全文
 
 ### by kanch
 

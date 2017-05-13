@@ -47,25 +47,25 @@ __该文件更新缓慢__
 
 #####聚类前的全体数据
 
-![聚类前的全体数据](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/all.png)
+![聚类前的全体数据](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/all.png)
 
 #####去除极端值（>400）
 
-![去除极端值（>400）](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/less400-9.png)
+![去除极端值（>400）](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/less400-9.png)
 
 #####3个簇的平均活跃时间段
 
-![3个簇的平均活跃时间段](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/2cr1.png)
+![3个簇的平均活跃时间段](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/2cr1.png)
 
 #####簇1
 
-![簇1](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/2c1.png)
+![簇1](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/2cr1.png)
 
 #####簇2
 
-![簇2](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/2c2.png)
+![簇2](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/2c2.png)
 
 
 #####簇3
 
-![簇3](https://github.com/ankanch/cuit-trs/blob/master/tiebabigdata-user-analyze/Data/result/2c3.png)
+![簇3](https://github.com/ankanch/data-analysis/raw/master/%E6%88%90%E9%83%BD%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B%E5%A4%A7%E5%AD%A6%E8%B4%B4%E5%90%A7%E7%94%A8%E6%88%B7%E5%88%86%E6%9E%90/Data/result/2c3.png)

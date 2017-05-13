@@ -29,13 +29,13 @@ http://akakanch.com/archives/661
 
 目测越到后面，过的人越来越少了。
 
-![2015级3次四级成绩变化图](https://github.com/ankanch/data-analysis/blob/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/2015%E7%BA%A73%E6%AC%A1%E5%9B%9B%E7%BA%A7%E6%88%90%E7%BB%A9%E5%8F%98%E5%8C%96%E5%9B%BE.png)
+![2015级3次四级成绩变化图](https://github.com/ankanch/data-analysis/raw/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/2015%E7%BA%A73%E6%AC%A1%E5%9B%9B%E7%BA%A7%E6%88%90%E7%BB%A9%E5%8F%98%E5%8C%96%E5%9B%BE.png)
 
-![2015级3次六级成绩变化图](https://github.com/ankanch/data-analysis/blob/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/2015%E7%BA%A73%E6%AC%A1%E5%85%AD%E7%BA%A7%E6%88%90%E7%BB%A9%E5%8F%98%E5%8C%96%E5%9B%BE.png)
+![2015级3次六级成绩变化图](https://github.com/ankanch/data-analysis/raw/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/2015%E7%BA%A73%E6%AC%A1%E5%85%AD%E7%BA%A7%E6%88%90%E7%BB%A9%E5%8F%98%E5%8C%96%E5%9B%BE.png)
 
-![通过率变化图](https://github.com/ankanch/data-analysis/blob/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/figure_1-3.png)
+![通过率变化图](https://github.com/ankanch/data-analysis/raw/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/figure_1-3.png)
 
-![最高分，最低分变化图](https://github.com/ankanch/data-analysis/blob/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/figure_1-6.png)
+![最高分，最低分变化图](https://github.com/ankanch/data-analysis/raw/master/CUIT-%E8%AE%A1%E7%AE%97%E6%9C%BACET4%EF%BC%8C6%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2-%E5%88%86%E6%9E%90/%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C/figure_1-6.png)
 
 
 
